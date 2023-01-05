@@ -1,0 +1,7 @@
+source=data.txt
+out_soal=soal.txt
+out_jawab=jawab.txt
+out_kunci=kunci.txt
+segment_soal=4 # this config is optional (soal and kunci segments)
+segment_jawaban=4.3 # this config is optional (jawaban control: segments and number of jawaban to fetch)
+comment=// # this config is optional (manage control for comment keyword in data.txt)

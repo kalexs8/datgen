@@ -2,6 +2,7 @@ import re
 from sys import argv
 from string import punctuation
 from traceback import format_exc
+from time import sleep
 
 class Logger:
     def __init__(self):
@@ -12,6 +13,7 @@ class Logger:
         print("Error, see log")
         with open("runtime.log", "a") as f:
             f.write("[Error]: " + message + "\n")
+        sleep(1.5)
         exit(1)
     def info(self, message):
         with open("runtime.log", "a") as f:

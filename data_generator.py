@@ -1,6 +1,8 @@
 import re
 from sys import argv
 from string import punctuation
+from traceback import format_exc
+from time import sleep
 
 class Logger:
     def __init__(self):
@@ -11,6 +13,7 @@ class Logger:
         print("Error, see log")
         with open("runtime.log", "a") as f:
             f.write("[Error]: " + message + "\n")
+        sleep(1.5)
         exit(1)
     def info(self, message):
         with open("runtime.log", "a") as f:
@@ -69,8 +72,7 @@ try:
 
 
 except Exception as e:
-    log.error("Python error: " + e)
-    
+    log.error("Python error: " + format_exc())
 
 soal = []
 jawab = []
@@ -83,7 +85,7 @@ with open(base_source, "r", encoding="utf-8") as f:
     try:
         s = f.read()
     except Exception as e:
-        log.error("Python error: " + e)
+        log.error("Python error: " + format_exc())
     pecahan = s.split("\n")
     st = ""
     kunci_jawaban = []
@@ -226,15 +228,15 @@ with open(out_soal, "w", encoding="utf-8") as f:
         for i in soal:
             if counter % segments == 0:
                 if counter == len(soal):
-                    f.write('Pair("{}", 0))'.format(i))
+                    f.write('Pair("""{}""", 0))'.format(i))
                 else:
-                    f.write('Pair("{}", 0)),\n\nlistOf('.format(i))
+                    f.write('Pair("""{}""", 0)),\n\nlistOf('.format(i))
             else:
-                f.write('Pair("{}", 0),\n'.format(i))
+                f.write('Pair("""{}""", 0),\n'.format(i))
 
             counter += 1
     except Exception as e:
-        log.error("Python error: " + e)
+        log.error("Python error: " + format_exc())
 
 with open(out_jawab, "w", encoding="utf-8") as f:
     len_jwb = len(jawab)
@@ -257,7 +259,7 @@ with open(out_jawab, "w", encoding="utf-8") as f:
             else:
                 f.write("),\nlistOf(\n")
     except Exception as e:
-        log.error("Python error: " + e)
+        log.error("Python error: " + format_exc())
 
 with open(out_kunci, "w") as f:
     f.write("listOf(")
